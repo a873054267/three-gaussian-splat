@@ -66,6 +66,16 @@ export class GaussianSplatGeometry extends THREE.InstancedBufferGeometry {
     try {
       const loader = new SplatLoader(undefined, loadingManager);
       const {data, bytesRead} = await loader.loadAsync(url);
+      //const ROW_LENGTH = 3 * 4 + 3 * 4 + 4 + 4; 每个顶点的数据是由32位构成的
+
+      //32位的属性，分别在initAttributes中逐一体现
+      //4+4+3+3+4 由于传入的buffer是uint8的，颜色，scale、
+      //结果数组是uint8的，所有要表示color对向，每位最大255
+      //点位的颜色color4位 
+      //quat 4位
+      //center 3位  
+       //scale 3位
+     
       const vertexCount = Math.floor(bytesRead / ROW_LENGTH);
       const bufferInfo = trimBuffer(data, this.maxSplats, vertexCount);
       this.worker = await new SortWorker(bufferInfo.vertexCount, transfer(bufferInfo.buffer, [bufferInfo.buffer.buffer]));

@@ -16,6 +16,7 @@ export class GaussianSplatMesh extends THREE.Mesh<GaussianSplatGeometry, Gaussia
   constructor(private url: string, maxSplats = Infinity) {
     const material = new GaussianSplatMaterial();
     const geometry = new GaussianSplatGeometry(maxSplats);
+    window.geometry =geometry
     super(geometry, material);
     this.rotation.x = Math.PI;
   }
@@ -42,6 +43,7 @@ export class GaussianSplatMesh extends THREE.Mesh<GaussianSplatGeometry, Gaussia
       this.material.sphereRadius = this._maskMeshSphere.scale.x;
     }
     if (this._maskMeshPlane) {
+      
       this._normal.set(0, 0, 1);
       this._normal.applyQuaternion(this._maskMeshPlane.quaternion);
       const planePoint = this._maskMeshPlane.position;

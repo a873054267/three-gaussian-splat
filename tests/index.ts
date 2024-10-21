@@ -5,8 +5,10 @@ import {renderer, camera, scene, controls} from './common';
 import {GaussianSplatMesh} from '../src/index';
 // import {MaskingSphere} from '../src/mesh/MaskingSphere';
 // import {Test} from '../src/worker_test';
-const bonsai = new URL('./bonsai.splat', import.meta.url).href;
+const bonsai = new URL('./guitar.splat', import.meta.url).href;
+
 const splat = new GaussianSplatMesh(bonsai, 1000000);
+window.splat =splat
 splat.load();
 scene.add(splat);
 
